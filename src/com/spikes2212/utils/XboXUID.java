@@ -1,10 +1,13 @@
 package com.spikes2212.utils;
 
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 
-public class XboXUID extends XboxController {
+public class XboXUID extends GenericHID {
 
+	private XboxController xboxController;
 	/**
 	 * Constructs a new {@link XboXUID} using the port of the USB on the driver
 	 * station.
@@ -27,7 +30,7 @@ public class XboXUID extends XboxController {
 
 			@Override
 			public boolean get() {
-				return getAButton();
+				return xboxController.getAButton();
 			}
 		};
 	}
@@ -42,7 +45,7 @@ public class XboXUID extends XboxController {
 
 			@Override
 			public boolean get() {
-				return getXButton();
+				return xboxController.getXButton();
 			}
 		};
 	}
@@ -57,7 +60,7 @@ public class XboXUID extends XboxController {
 
 			@Override
 			public boolean get() {
-				return getBButton();
+				return xboxController.getBButton();
 			}
 		};
 	}
@@ -72,7 +75,7 @@ public class XboXUID extends XboxController {
 
 			@Override
 			public boolean get() {
-				return getYButton();
+				return xboxController.getYButton();
 			}
 		};
 	}
@@ -83,7 +86,7 @@ public class XboXUID extends XboxController {
 	 * @return the value of the right trigger on the joystick.
 	 */
 	public double getRTAxis() {
-		return getTriggerAxis(Hand.kRight);
+		return xboxController.getTriggerAxis(Hand.kRight);
 	}
 
 	/**
@@ -92,7 +95,7 @@ public class XboXUID extends XboxController {
 	 * @return the value of the left trigger on the joystick.
 	 */
 	public double getLTAxis() {
-		return getTriggerAxis(Hand.kLeft);
+		return xboxController.getTriggerAxis(Hand.kLeft);
 	}
 
 	/**
@@ -105,7 +108,7 @@ public class XboXUID extends XboxController {
 
 			@Override
 			public boolean get() {
-				return getBumper(Hand.kRight);
+				return xboxController.getBumper(Hand.kRight);
 			}
 		};
 	}
@@ -120,7 +123,7 @@ public class XboXUID extends XboxController {
 
 			@Override
 			public boolean get() {
-				return getBumper(Hand.kLeft);
+				return xboxController.getBumper(Hand.kLeft);
 			}
 		};
 	}
@@ -135,7 +138,7 @@ public class XboXUID extends XboxController {
 
 			@Override
 			public boolean get() {
-				return getStickButton(Hand.kRight);
+				return xboxController.getStickButton(Hand.kRight);
 			}
 		};
 	}
@@ -150,10 +153,41 @@ public class XboXUID extends XboxController {
 
 			@Override
 			public boolean get() {
-				return getStickButton(Hand.kLeft);
+				return xboxController.getStickButton(Hand.kLeft);
 			}
 		};
 	}
+	
+	/**
+	 * Returns the button on the left stick.
+	 * 
+	 * @return the button on the left stick.
+	 */
+	public Button getStartButton() {
+		return new Button() {
+
+			@Override
+			public boolean get() {
+				return xboxController.getStartButton();
+			}
+		};
+	}
+
+	/**
+	 * Returns the button on the left stick.
+	 * 
+	 * @return the button on the left stick.
+	 */
+	public Button getBackButton() {
+		return new Button() {
+
+			@Override
+			public boolean get() {
+				return xboxController.getBackButton();
+			}
+		};
+	}
+
 
 	/**
 	 * Get the X axis value of the right stick.
@@ -245,5 +279,17 @@ public class XboXUID extends XboxController {
 				return getPOV() == 90;
 			}
 		};
+	}
+
+	@Override
+	public double getX(Hand hand) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getY(Hand hand) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
